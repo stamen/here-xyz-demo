@@ -1,0 +1,29 @@
+import:
+    - https://www.nextzen.org/carto/refill-style/refill-style.zip
+    - https://s3.amazonaws.com/xyz-demo/data/demo.yaml
+    - https://www.nextzen.org/carto/refill-style/themes/label-5.zip
+sources:
+
+styles:
+    _points:
+        base: points
+        blend: overlay
+        blend_order: 10
+    _text:
+        base: text
+        blend: overlay
+        blend_order: 11
+    _lines:
+        base: lines
+        blend: overlay
+        blend_order: 11
+    _lines_low:
+        base: lines
+        blend: inlay
+        blend_order: 2
+    _polygons_inlay:
+        base: polygons
+        blend: inlay
+        blend_order: 1
+
+layers:
