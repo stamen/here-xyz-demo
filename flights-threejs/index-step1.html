@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <title>Live Flights</title>
+        <style>
+            body { margin: 0; }
+            canvas { width: 100%; height: 100% }
+        </style>
+    </head>
+<style>
+body {
+    font-family: sans-serif;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    color: white;
+}
+#control {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 20px;
+}
+h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: normal;
+}
+.to {
+    color: #FF6464b8
+}
+.from {
+    color: #8AECE4b8;
+}
+#property-list {
+    margin-left: -3px;
+}
+.view {
+    display: inline-block;
+    font-size: 10px;
+    height: 12px;
+    line-height: 10px;
+    border: 1px solid #979797;
+    color: #979797;
+    margin: 3px;
+    padding: 4px;
+    cursor: pointer;
+    background: none;
+}
+.view.selected {
+    border: 1px solid white;
+    color: white;
+}
+#pauseButtonId {
+    position: absolute;
+    border: 1px solid #979797;
+    color: #979797;
+    font-size: 10px;
+    height: 12px;
+    left: 0;
+    bottom: 0;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding: 4px;
+}
+#tooltip {
+    position: absolute;
+    display: none;
+    font-size: 10px;
+    background: rgba(0,0,0,0.4);
+    padding: 4px;
+}
+</style>
+   <body style='margin: 0px; background-color: #000000; overflow: hidden;'>
+    <div id="control">
+        <h2>live flights <span class="to">to</span> or <span class="from">from</span></h2>
+        <div id="property-list"></div>
+    </div>
+    <div id="pauseButtonId">Pause rotation</div>
+    <div id="tooltip"></div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.1.3/fetch-jsonp.min.js"></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="./js/three.min.js"></script>
+        <script src="./js/CustomOrbitControls.js"></script>
+        <script src="./js/threex.domevents.js"></script>
+
+        <script>
+
+            var runAnim = true;
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+            var RADIUS = 1;
+            var MAXHEIGHT = 0.04;
+
+            var pauseButton = document.getElementById('pauseButtonId');
+
+            pauseButton.onclick = function ToggleAnimation() {
+              if (runAnim) {
+                pauseButton.innerHTML = 'Restart rotation';
+                runAnim = false;
+              } else {
+                pauseButton.innerHTML = 'Pause rotation';
+                runAnim = true;
+              }
+            }
+
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.sortObjects = false;
+            document.body.appendChild( renderer.domElement );
+
+            var domEvents = new THREEx.DomEvents(camera, renderer.domElement);
+
+            addLights();
+            var world = new THREE.Object3D();
+            addEarth(world);
+            addClouds(world);
+            scene.add(world);
+
+            camera.position.z = 2;
+
+            var rotSpeed = -0.0001;
+            var controls = new OrbitControls( camera );
+            controls.maxDistance = 10;
+            controls.minDistance = 1.2;
+
+            var animate = function () {
+                requestAnimationFrame( animate );
+
+                if (runAnim) {
+                  var x = camera.position.x;
+                  var z = camera.position.z;
+                  camera.position.x = x * Math.cos(rotSpeed) + z * Math.sin(rotSpeed);
+                  camera.position.z = z * Math.cos(rotSpeed) - x * Math.sin(rotSpeed);
+                }
+                renderer.render( scene, camera );
+                controls.update();
+            };
+
+            window.addEventListener( 'resize', onWindowResize, false );
+            function onWindowResize() {
+
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+            }
+
+            animate();
+
+            function addEarth(obj) {
+                // flat earth
+                // var geometry = new THREE.CylinderGeometry( 1, 1, 0.05, 64 );
+                var geometry = new THREE.SphereGeometry( RADIUS, 32, 32 );
+
+                var material = new THREE.MeshPhongMaterial({
+                    map: new THREE.TextureLoader().load( './img/8081_earthmap4k.jpg')
+                    ,bumpMap: new THREE.TextureLoader().load( './img/8081_earthbump4k.jpg')
+                    ,bumpScale: 0.007
+                    ,specularMap: new THREE.TextureLoader().load( './img/8081_earthspec4k.jpg')
+                    ,specular: new THREE.Color(0x0E0E0E)
+
+                })
+
+                obj.add( new THREE.Mesh( geometry, material ));
+
+                return obj;
+
+            }
+
+            function addClouds(obj) {
+                var spGeo = new THREE.SphereGeometry(RADIUS, 36, 36 );
+                var cloudsTexture = THREE.ImageUtils.loadTexture( "./img/8081_earthhiresclouds4K.jpg" );
+                var materialClouds = new THREE.MeshLambertMaterial( { color: 0xffffff, map: cloudsTexture, transparent:true, opacity:0.4 } );
+
+                meshClouds = new THREE.Mesh( spGeo, materialClouds );
+                meshClouds.scale.set( 1.015, 1.015, 1.015 );
+                obj.add( meshClouds );
+            }
+
+            function addLights() {
+                var lights = [];
+                lights[ 0 ] = new THREE.PointLight( 0x909090, 1, 0 );
+                lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+                lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+                lights[ 3 ] = new THREE.AmbientLight( 0x706570 ); // soft white light
+
+                lights[ 0 ].position.set( 0, 400, 0 );
+                lights[ 1 ].position.set( 400, 000, 100 );
+                lights[ 2 ].position.set( - 100, - 200, - 100 );
+
+                scene.add( lights[ 0 ] );
+                scene.add( lights[ 1 ] );
+                scene.add( lights[ 2 ] );
+                scene.add( lights[ 3 ] );
+            }
+
+        </script>
+    </body>
+</html>
