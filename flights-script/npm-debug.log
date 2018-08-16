@@ -1,0 +1,26 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/alan/.nvm/versions/node/v5.9.1/bin/node',
+1 verbose cli   '/Users/alan/.nvm/versions/node/v5.9.1/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'main' ]
+2 info using npm@3.7.3
+3 info using node@v5.9.1
+4 verbose stack Error: missing script: main
+4 verbose stack     at run (/Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/lib/run-script.js:147:19)
+4 verbose stack     at /Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/lib/run-script.js:57:5
+4 verbose stack     at /Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/node_modules/read-package-json/read-json.js:345:5
+4 verbose stack     at checkBinReferences_ (/Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/node_modules/read-package-json/read-json.js:309:45)
+4 verbose stack     at final (/Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/node_modules/read-package-json/read-json.js:343:3)
+4 verbose stack     at then (/Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/node_modules/read-package-json/read-json.js:113:5)
+4 verbose stack     at ReadFileContext.<anonymous> (/Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/node_modules/read-package-json/read-json.js:284:20)
+4 verbose stack     at ReadFileContext.callback (/Users/alan/.nvm/versions/node/v5.9.1/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16)
+4 verbose stack     at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:324:13)
+5 verbose cwd /Users/alan/github/here-xyz-demo/flights-script
+6 error Darwin 17.5.0
+7 error argv "/Users/alan/.nvm/versions/node/v5.9.1/bin/node" "/Users/alan/.nvm/versions/node/v5.9.1/bin/npm" "run" "main"
+8 error node v5.9.1
+9 error npm  v3.7.3
+10 error missing script: main
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
