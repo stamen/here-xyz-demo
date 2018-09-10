@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Madrid Urban Air Quality</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+        .container {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+        }
+        .header {
+            position: absolute;
+            top: -8px;
+            left: 0px;
+            padding-left: 50px;
+            right: 0;
+            padding: 10px;
+            z-index: 1000;
+            background-color: rgba(255,255,255,0.75);
+        }
+        h2 {
+            margin: 10px 0;
+            margin-left: 50px;
+        }
+        h3 {
+            margin: 0;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        #property-list, #playback {
+            display: inline-block;
+        }
+
+        .view {
+            display: inline-block;
+            font-size: 12px;
+            border: 1px solid black;
+            border-radius: 3px;
+            margin: 3px;
+            padding: 4px;
+            background: #ffab96;
+        }
+
+        .view:hover {
+            background: dodgerblue;
+            color: white;
+            margin-top: -2px;
+            box-shadow: 1px 1px 1px black;
+        }
+
+        .view:active {
+            margin-top: -2px;
+        }
+
+        #playback {
+            margin-right: 1em;
+            margin-left: 1em;
+        }
+
+        #playback .view {
+            background-color: #ab96ff;
+        }
+
+        .view.selected {
+            background: white;
+            color: black;
+        }
+
+        #datepicker {
+            margin-left: 50px;
+            font-size: 12px;
+        }
+
+        .flatpickr-minute {
+            pointer-events: none;
+        }
+
+        .flatpickr-minute + .arrowUp {
+            pointer-events: none;
+        }
+
+        .flatpickr-minute + .arrowUp + .arrowDown {
+            pointer-events: none;
+        }
+
+        .numInputWrapper:nth-child(3):hover {
+            background: none;
+        }
+
+        .numInputWrapper:nth-child(3):hover .arrowUp {
+            display: none;
+        }
+
+        .numInputWrapper:nth-child(3):hover .arrowDown {
+            display: none;
+        }
+
+
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+        <h2>Madrid Urban Air Quality</h2>
+    </div>
+    <div class="container">
+        <div id="map"></div>
+    </div>
+
+    <!-- leaflet -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
+
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Demo setup -->
+    <script>
+        var theMap = L.map('map', {maxZoom: 14});
+        theMap.attributionControl.addAttribution('Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Map data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>');
+
+        L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.png').addTo(theMap);
+        // center of madrid
+        theMap.setView([40.416232, -3.703637], 13);
+
+    </script>
+
+  </body>
+</html>
