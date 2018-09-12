@@ -18,7 +18,7 @@ sources:
     trees:
         url: https://xyz.api.here.com/hub/spaces/ZXKLXJZ4/tile/web/{z}_{x}_{y}
         url_params:
-            access_token: POeeAOU4lvKzTxMw8QifPA
+            access_token: AQAd6lqjXCQJrGMMkvbUItM
             clip: true
         type: GeoJSON
 

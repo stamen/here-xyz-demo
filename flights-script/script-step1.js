@@ -96,7 +96,7 @@ function addDataToSpace(geojson) {
       url: 'https://xyz.api.here.com/hub/spaces/' + config.spaceId + '/features', // instead of adding the tags here, I'll write them into the geojson object above
       headers:
        {
-         'Authorization': 'Bearer tY73HaInq0Vc4CvQb-ANAQ',
+         'Authorization': 'Bearer AQAd6lqjXCQJrGMMkvbUItM',
          'Content-Type': 'application/geo+json'
        },
       body: JSON.stringify(feature)

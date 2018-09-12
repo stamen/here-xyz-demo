@@ -194,7 +194,7 @@
 
 
         function fetchData(airport) {
-            var url = 'https://xyz.api.here.com/hub/spaces/CcZXUo0i/search?access_token=POeeAOU4lvKzTxMw8QifPA&tags=' + airport.code;
+            var url = 'https://xyz.api.here.com/hub/spaces/CcZXUo0i/search?access_token=AQAd6lqjXCQJrGMMkvbUItM&tags=' + airport.code;
 
             fetch(url).then(resp => resp.json()).then(data => {
                 renderPlanes(data.features);

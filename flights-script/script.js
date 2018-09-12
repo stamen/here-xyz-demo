@@ -96,7 +96,7 @@ function addDataToSpace(geojson) {
       url: 'https://xyz.api.here.com/hub/spaces/' + config.spaceId + '/features', // instead of adding the tags here, I'll write them into the geojson object above
       headers:
        {
-         'Authorization': 'Bearer tY73HaInq0Vc4CvQb-ANAQ',
+         'Authorization': 'Bearer AQAd6lqjXCQJrGMMkvbUItM',
          'Content-Type': 'application/geo+json'
        },
       body: JSON.stringify(feature)
@@ -117,7 +117,7 @@ function logNumberOfFeatures() {
     url: 'https://xyz.api.here.com/hub/spaces/' + config.spaceId + '/count',
     headers:
      {
-       'Authorization': 'Bearer tY73HaInq0Vc4CvQb-ANAQ',
+       'Authorization': 'Bearer AQAd6lqjXCQJrGMMkvbUItM',
        'Content-Type': 'application/geo+json'
      }
   }
@@ -145,7 +145,7 @@ function deleteOldDataFromSpace() {
         url: 'https://xyz.api.here.com/hub/spaces/' + config.spaceId + '/features?tags=hour-' + i,
         headers:
          {
-           'Authorization': 'Bearer tY73HaInq0Vc4CvQb-ANAQ',
+           'Authorization': 'Bearer AQAd6lqjXCQJrGMMkvbUItM',
            'Content-Type': 'application/geo+json'
          }
       }

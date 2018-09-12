@@ -404,10 +404,10 @@ h2 {
 
             function fetchPlanes() {
                 console.log('fetching planes', airport);
-                var p = fetch('https://xyz.api.here.com/hub/spaces/l9F3RBfX/search?access_token=POeeAOU4lvKzTxMw8QifPA&tags=to-' + airport).then(function(response) {
+                var p = fetch('https://xyz.api.here.com/hub/spaces/l9F3RBfX/search?access_token=AQAd6lqjXCQJrGMMkvbUItM&tags=to-' + airport).then(function(response) {
                     return response.json()
                 }).then(function(json) {
-                    var p2 = fetch('https://xyz.api.here.com/hub/spaces/l9F3RBfX/search?access_token=POeeAOU4lvKzTxMw8QifPA&tags=from-' + airport).then(function(response2) {
+                    var p2 = fetch('https://xyz.api.here.com/hub/spaces/l9F3RBfX/search?access_token=AQAd6lqjXCQJrGMMkvbUItM&tags=from-' + airport).then(function(response2) {
                         return response2.json()
                     }).then(function(json2) {
                         //window.data = json;
