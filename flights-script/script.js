@@ -129,7 +129,7 @@ function logNumberOfFeatures() {
   })
 }
 
-function deleteOldDataFromSpace() {
+function deleteOldData() {
   var currentTime = new Date();
   var currentHour = currentTime.getHours();
   var previousHour = (currentHour == 0) ? 23 : (currentHour - 1);
@@ -159,11 +159,11 @@ function deleteOldDataFromSpace() {
 }
 
 logNumberOfFeatures();
-deleteOldDataFromSpace(); // clear out the old data
+deleteOldData(); // clear out the old data
 queryData();
 
 setInterval(function() {
   logNumberOfFeatures();
-  deleteOldDataFromSpace(); // clear out the old data
+  deleteOldData(); // clear out the old data
   queryData()
 }, 60000) // 60 seconds, aka 1 minute(s)
