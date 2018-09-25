@@ -193,6 +193,8 @@
         // center of madrid
         theMap.setView([40.416232, -3.703637], 13);
 
+        var spaceID = 'sZZXbJam';
+        var accessToken = '48XtBKvI2SDiL2wNvgnqqg';
         var radiusScale = d3.scaleLinear().domain([0, 200]).range([7, 70]).clamp(true);
         var colorScale = d3.scaleSequential(d3.interpolateOrRd).domain([0, 100]);
         function renderCircles() {
@@ -217,7 +219,7 @@
         }
 
         function fetchData(dateStr) {
-            var url = 'https://xyz.api.here.com/hub/spaces/sZZXbJam/search?limit=100&access_token=48XtBKvI2SDiL2wNvgnqqg&tags=' + dateStr;
+            var url = 'https://xyz.api.here.com/hub/spaces/' + spaceID + '/search?limit=100&access_token=' + accessToken + '&tags=' + dateStr;
             d3.json(url).then(function(data) {
                 theData = data;
                 renderCircles();
